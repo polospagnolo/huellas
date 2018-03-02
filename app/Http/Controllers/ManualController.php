@@ -15,7 +15,7 @@ class ManualController extends Controller
      */
     public function index()
     {
-        //
+        return view('manual.index');
     }
 
     /**
@@ -44,7 +44,9 @@ class ManualController extends Controller
        $manual->comentario = $request->has('comment') ? $request->get('comment') : null;
        $manual->save();
 
-       return 'Guardado';
+       flash('Entrada / Salida guardada con éxito!')->success();
+
+       return redirect()->route('manual.create');
     }
 
     /**
@@ -91,4 +93,6 @@ class ManualController extends Controller
     {
         //
     }
+
+    public function datatable(){}
 }

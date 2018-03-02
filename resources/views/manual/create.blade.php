@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Entrada / Salida de Empleados</div>
+                    <div class="card-header">Nueva Entrada / Salida de Empleados</div>
                     <div class="card-body">
                         <form action="{{route('manual.store')}}" method="POST">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">

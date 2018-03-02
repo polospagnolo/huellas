@@ -19,3 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/manual','ManualController');
+
+
+
+/**
+ * DataTables
+ */
+
+Route::group(['prefix' => 'datatable'], function ()
+{
+    Route::get('manual/','ManualController@dataTable')->name('datatable.manual');
+});
