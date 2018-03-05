@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Empleado;
 use App\Manual;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class ManualController extends Controller
 {
@@ -94,5 +95,20 @@ class ManualController extends Controller
         //
     }
 
-    public function datatable(){}
+    public function datatable(Datatables $datatables)
+    {
+        $builder = Manual::select('id', 'empleado', 'tipo', 'comentario' ,'created_at');
+
+        return $datatables->eloquent($builder)
+            ->editColumn('created_at', function ($manual) {
+                return $manual->created_at->format('d-m-Y H:i:s3');
+            })
+
+            ->editColumn('tipo', function ($manual) {
+                return config('app.types')[$manual->tipo];
+            })
+
+            ->rawColumns(['completada', 'tipo'])
+            ->make();
+    }
 }

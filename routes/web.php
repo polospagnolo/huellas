@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/load','HomeController@load')->name('load');
 Route::resource('/manual','ManualController');
 
 

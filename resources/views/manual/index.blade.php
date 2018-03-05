@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('css')
-    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
     <div class="container">
@@ -19,7 +19,6 @@
                                         <th>MOTIVO</th>
                                         <th>COMENTARIO</th>
                                         <th>FECHA Y HORA</th>
-                                        <th></th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -32,7 +31,8 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         $(function () {
             var table = $('#manual').dataTable({
@@ -67,12 +67,11 @@
                     },
                 },
                 columns: [
-                    {data: 'id', name: 'man_reposicion.id'},
-                    {data: 'descripcion', name: 'man_reposicion.descripcion'},
-                    {data: 'almacen', name: 'man_reposicion.almacen'},
-                    {data: 'asignada', name: 'man_reposicion.asignada'},
-                    {data: 'completada', name: 'man_reposicion.completada'},
-                    {data: 'created_at', name: 'man_reposicion.created_at'}
+                    {data: 'id', name: 'manual.id'},
+                    {data: 'empleado', name: 'manual.empleado'},
+                    {data: 'tipo', name: 'manual.tipo'},
+                    {data: 'comentario', name: 'manual.comentario'},
+                    {data: 'created_at', name: 'manual.created_at'}
                 ]
             });
 

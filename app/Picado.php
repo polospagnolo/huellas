@@ -11,7 +11,8 @@ class Picado extends Model
         'empleado',
         'tiempo',
         'dedo',
-        'tipo'
+        'tipo',
+        'fecha'
     ];
 
     protected $appends= ['type'];

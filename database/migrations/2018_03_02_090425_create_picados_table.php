@@ -20,6 +20,7 @@ class CreatePicadosTable extends Migration
             $table->dateTime('tiempo');
             $table->boolean('dedo');
             $table->integer('tipo');
+            $table->date('fecha');
             $table->timestamps();
         });
     }
