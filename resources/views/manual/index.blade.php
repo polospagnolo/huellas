@@ -15,7 +15,7 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>EMPELADO</th>
+                                        <th>EMPLEADO</th>
                                         <th>TIPO</th>
                                         <th>MOTIVO</th>
                                         <th>COMENTARIO</th>
