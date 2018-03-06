@@ -49,7 +49,7 @@
                                             <td class="table-success">{{$key}}</td>
 
                                             @foreach($value as $val)
-                                                @if(count($val) >= 3)
+                                                @if(sizeof($val) >= 3)
                                                     <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}} {{isToBeLate($val['day'],$val['entrada'])}}">
                                                         <a href="{{route('picado.ampliado',[$key,$val['url']])}}">{{$val['entrada']}}</a>
                                                     </td>
