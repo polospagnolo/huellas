@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Empleado;
 use App\Manual;
+use App\MotivoAusencia;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
@@ -28,7 +29,8 @@ class ManualController extends Controller
     {
         $options = config('app.types');
         $employees = Empleado::all();
-        return view('manual.create',compact('options','employees'));
+        $motivos = MotivoAusencia::all();
+        return view('manual.create',compact('options','employees','motivos'));
     }
 
     /**
@@ -43,6 +45,7 @@ class ManualController extends Controller
        $manual->empleado = $request->get('employee');
        $manual->tipo = $request->get('type');
        $manual->comentario = $request->has('comment') ? $request->get('comment') : null;
+       $manual->motivo_id = $request->get('motivo_id');
        $manual->save();
 
        flash('Entrada / Salida guardada con éxito!')->success();

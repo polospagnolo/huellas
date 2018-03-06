@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Empleado;
 use App\Picado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -42,6 +43,7 @@ class HomeController extends Controller
         $empleados = Picado::select('empleado')
             ->whereBetween('fecha', [$star->startOfWeek(), $end->endOfWeek()])
             ->distinct('empleado')
+            ->orderBy('empleado','ASC')
             ->get();
 
         if(!$empleados->count())
@@ -88,7 +90,8 @@ class HomeController extends Controller
                 'entrada' => '',
                 'salida' => '',
                 'time' => 'Error',
-                'day' => 0
+                'day' => 0,
+                'url' => ''
             ];
     }
 
@@ -105,11 +108,12 @@ class HomeController extends Controller
             // dd($intervalo->h);
             if ($time == null) {
                 $time['time'] = date('H:i', strtotime($intervalo->format('%H:%i')));
-
+                $time['url'] = date('Y-m-d',strtotime($col[$i]['tiempo']));
                 $time['day'] = date('N',strtotime($col[$i]['tiempo']));
             } else {
 
                 $time['day'] = date('N',strtotime($col[$i]['tiempo']));
+                $time['url'] = date('Y-m-d',strtotime($col[$i]['tiempo']));
                 if ($m % 2 == 0) {
                     $time['time'] = date('H:i', strtotime($time['time'] . " + " . $intervalo->h . "hours + " . $intervalo->i . " minutes"));
                 } else {
@@ -154,6 +158,38 @@ class HomeController extends Controller
       }
       fclose($fr);
      return redirect()->route('home');
+    }
+
+    public function aplicado($empleado,$day)
+    {
+        $picado = Picado::where('empleado',$empleado)
+                          ->where('fecha',$day)->get();
+
+        return view('ampliado',compact('empleado','day','picado'));
+    }
+
+    public function mensual(Request $request)
+    {
+        if(!$request->has('month'))
+        {
+            return view('mensual');
+        }
+        \Carbon\Carbon::setLocale('es');
+        $partes = explode('-',$request->get('month'));
+        $year = $partes[0];
+        $month = $partes[1];
+        $c = \Carbon\Carbon::create($year,$month,'01');
+
+        $ini =$c->firstOfMonth()->format('Y-m-d');
+        $fin = $c->lastOfMonth()->format('Y-m-d');
+
+        $fechas = date_range($ini,$fin,"+1 day", "d");
+        $dias = date_range($ini,$fin,"+1 day", "N");
+        $dia_completo = date_range($ini,$fin,"+1 day","Y-m-d");
+
+        $empleados = Empleado::select('nombre')->orderBy('nombre','ASC')->get();
+
+        return view('mensual',compact('t','fechas','dias','empleados','dia_completo'));
     }
 
 

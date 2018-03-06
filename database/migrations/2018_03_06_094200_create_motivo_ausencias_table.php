@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManualsTable extends Migration
+class CreateMotivoAusenciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateManualsTable extends Migration
      */
     public function up()
     {
-        Schema::create('manual', function (Blueprint $table) {
+        Schema::create('motivo_ausencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('empleado');
-            $table->integer('tipo');
-            $table->string('comentario',150)->nullable();
+            $table->string('nombre',100);
+            $table->string('letra',2);
+            $table->string('clase')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateManualsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manual');
+        Schema::dropIfExists('motivo_ausencias');
     }
 }

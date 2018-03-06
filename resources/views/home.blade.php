@@ -11,7 +11,8 @@
                             <form action="{{url()->current()}}" method="get">
                                 <div class="col-sm-2">
                                     <div class="form-group">
-                                        <input type="week" class="form-control" id="week" name="week" value="{{Request::get('week')}}">
+                                        <input type="week" class="form-control" id="week" name="week"
+                                               value="{{Request::get('week')}}">
                                     </div>
 
                                 </div>
@@ -28,13 +29,13 @@
                             <div class="col-sm-12">
                                 <table class="table table-bordered table-hover table-condensed">
                                     <thead>
-                                    <tr>
-                                        <th rowspan="2">Empleado</th>
+                                    <tr class="table-info">
+                                        <th rowspan="2" style="vertical-align: middle;">Empleado</th>
                                         @foreach($t['columnas'] as $columna)
                                             <th colspan="3">{{$columna}}</th>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    <tr class="table-info">
                                         @foreach($t['days'] as $day)
                                             <th>Entrada</th>
                                             <th>Salida</th>
@@ -45,12 +46,16 @@
                                     <tbody>
                                     @foreach($t['empleados'] as $key => $value)
                                         <tr>
-                                            <td>{{$key}}</td>
+                                            <td class="table-success">{{$key}}</td>
 
                                             @foreach($value as $val)
                                                 @if(count($val) >= 3)
-                                                    <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}} {{isToBeLate($val['day'],$val['entrada'])}}">{{$val['entrada']}}</td>
-                                                    <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}}">{{$val['salida']}}</td>
+                                                    <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}} {{isToBeLate($val['day'],$val['entrada'])}}">
+                                                        <a href="{{route('picado.ampliado',[$key,$val['url']])}}">{{$val['entrada']}}</a>
+                                                    </td>
+                                                    <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}}">
+                                                        <a href="{{route('picado.ampliado',[$key,$val['url']])}}">{{$val['salida']}}</a>
+                                                    </td>
                                                     <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}}">{{$val['time']}}</td>
                                                 @else
                                                     <td></td>
