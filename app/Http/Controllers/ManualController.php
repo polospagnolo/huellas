@@ -10,6 +10,12 @@ use Yajra\Datatables\Datatables;
 
 class ManualController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +56,7 @@ class ManualController extends Controller
 
        flash('Entrada / Salida guardada con éxito!')->success();
 
-       return redirect()->route('manual.create');
+       return redirect()->route('manual.index');
     }
 
     /**
@@ -70,9 +76,14 @@ class ManualController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Manual $manual)
     {
-        //
+        $options = config('app.types');
+        $employees = Empleado::all();
+        $motivos = MotivoAusencia::all();
+        return view('manual.edit',compact('options','employees','motivos','manual'));
+
+
     }
 
     /**
@@ -82,9 +93,16 @@ class ManualController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Manual $manual)
     {
-        //
+        $manual->empleado = $request->get('employee');
+        $manual->tipo = $request->get('type');
+        $manual->comentario = $request->has('comment') ? $request->get('comment') : null;
+        $manual->motivo_id = $request->get('motivo_id');
+        $manual->update();
+
+        flash('Entrada / Salida actualizada con éxito!')->success();
+        return redirect()->route('manual.index');
     }
 
     /**
@@ -100,7 +118,7 @@ class ManualController extends Controller
 
     public function datatable(Datatables $datatables)
     {
-        $builder = Manual::select('id', 'empleado', 'tipo', 'comentario' ,'created_at');
+        $builder = Manual::with('motivo');
 
         return $datatables->eloquent($builder)
             ->editColumn('created_at', function ($manual) {
@@ -110,8 +128,14 @@ class ManualController extends Controller
             ->editColumn('tipo', function ($manual) {
                 return config('app.types')[$manual->tipo];
             })
+            ->addColumn('nombre', function($manual){
+                return $manual->motivo->nombre;
+            })
+            ->addColumn('editar', function($manual){
+                return '<a href="'.route('manual.edit',$manual->id).'" class="btn btn-info btn-xs">EDITAR</a>';
+            })
 
-            ->rawColumns(['completada', 'tipo'])
+            ->rawColumns(['completada', 'tipo','editar'])
             ->make();
     }
 }

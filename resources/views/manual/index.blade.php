@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Listado Salida / Entradas</div>
+                    <div class="card-header">Listado Salida / Entradas <a href="{{route('manual.create')}}" class="btn btn-info btn-sm">Nueva Entrada</a></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -16,9 +16,11 @@
                                     <tr>
                                         <th>#</th>
                                         <th>EMPELADO</th>
+                                        <th>TIPO</th>
                                         <th>MOTIVO</th>
                                         <th>COMENTARIO</th>
                                         <th>FECHA Y HORA</th>
+                                        <th>EDITAR</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -70,8 +72,10 @@
                     {data: 'id', name: 'manual.id'},
                     {data: 'empleado', name: 'manual.empleado'},
                     {data: 'tipo', name: 'manual.tipo'},
+                    {data: 'nombre', name: 'motivo_ausencias.nombre'},
                     {data: 'comentario', name: 'manual.comentario'},
-                    {data: 'created_at', name: 'manual.created_at'}
+                    {data: 'created_at', name: 'manual.created_at'},
+                    {data: 'editar'}
                 ]
             });
 
