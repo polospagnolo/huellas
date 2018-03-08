@@ -31,13 +31,12 @@ class HomeController extends Controller
             return view('home', compact('t'));
         }
         $partes = explode('-', $request->get('week'));
-        //dd($partes);
         setlocale(LC_TIME, 'Spanish');
         $end = \Carbon\Carbon::now();
-        $end->setISODate($partes[0], substr($partes[1], -1));
+        $end->setISODate($partes[0], substr($partes[1], -2));
         //dd($end->formatLocalized('%A'));
         $star = \Carbon\Carbon::now();
-        $star->setISODate($partes[0], substr($partes[1], -1));
+        $star->setISODate($partes[0], substr($partes[1], -2));
 
 
         $empleados = Picado::select('empleado')
