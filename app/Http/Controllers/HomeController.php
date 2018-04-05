@@ -148,7 +148,7 @@ class HomeController extends Controller
               $picado->empleado = $partes[1];
               $picado->tiempo = $partes[2];
               $picado->dedo = $partes[3];
-              $picado->tipo = $partes[4];
+              $picado->tipo = strlen($partes[4]) > 0 ? $partes[4] : 0;
               $picado->fecha = $partes[2];
 
               $picado->save();
