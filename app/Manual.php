@@ -26,9 +26,4 @@ class Manual extends Model
     {
         return config('app.types')[$this->tipo];
     }
-
-    public function getMotAttribute()
-    {
-        return $this->motivo()->first()->nombre;
-    }
 }
