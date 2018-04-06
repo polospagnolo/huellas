@@ -72,7 +72,7 @@
                     {data: 'id', name: 'manual.id'},
                     {data: 'empleado', name: 'manual.empleado'},
                     {data: 'tipo', name: 'manual.tipo'},
-                    {data: 'nombre', name: 'motivo_ausencias.nombre'},
+                    {data: 'nombre', name: 'manual.mot', searchable:false},
                     {data: 'comentario', name: 'manual.comentario'},
                     {data: 'created_at', name: 'manual.created_at'},
                     {data: 'editar'}

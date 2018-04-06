@@ -126,10 +126,10 @@ class ManualController extends Controller
             })
 
             ->editColumn('tipo', function ($manual) {
-                return config('app.types')[$manual->tipo];
+              return $manual->type;
             })
             ->addColumn('nombre', function($manual){
-                return $manual->motivo->nombre;
+                $manual->motivo->nombre;
             })
             ->addColumn('editar', function($manual){
                 return '<a href="'.route('manual.edit',$manual->id).'" class="btn btn-info btn-xs">EDITAR</a>';

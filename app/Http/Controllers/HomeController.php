@@ -142,19 +142,21 @@ class HomeController extends Controller
       while (!feof($fr)) {
           $t = substr(utf8_encode(fgets($fr)), 0, -2);
           $partes = explode("\t", $t);
+
           if (count($partes) == 5) {
               $picado = New Picado();
               $picado->idd = $partes[0];
               $picado->empleado = $partes[1];
               $picado->tiempo = $partes[2];
               $picado->dedo = $partes[3];
-              $picado->tipo = strlen($partes[4]) > 0 ? $partes[4] : 0;
+              $picado->tipo = intval($partes[4]);
               $picado->fecha = $partes[2];
-
-              $picado->save();
+              return $picado;
+             // $picado->save();
               $r[] = $partes;
           }
       }
+
       fclose($fr);
      return redirect()->route('home');
     }

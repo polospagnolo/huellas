@@ -15,8 +15,20 @@ class Manual extends Model
         'motivo_id'
     ];
 
+    protected $appends= ['type'];
+
     public function motivo()
     {
         return $this->belongsTo(MotivoAusencia::class);
+    }
+
+    public function getTypeAttribute()
+    {
+        return config('app.types')[$this->tipo];
+    }
+
+    public function getMotAttribute()
+    {
+        return $this->motivo()->first()->nombre;
     }
 }
