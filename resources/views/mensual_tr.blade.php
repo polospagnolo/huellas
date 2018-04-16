@@ -3,7 +3,7 @@
 
 @endphp
 @if(is_null($retraso))
-    <td class="{{$dia > 5 ? 'table-dark' : ''}} text-center" style="cursor: pointer;>
+    <td class="{{$dia > 5 ? 'table-dark' : ''}} text-center" style="cursor: pointer;">
         @if($dia < 6)
             <a href="{{url('picado/ampliado/'.$empleado->nombre.'/'.$dia_completo[$key])}}">Ver</a>
         @endif
