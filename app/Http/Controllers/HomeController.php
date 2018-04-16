@@ -42,11 +42,10 @@ class HomeController extends Controller
         $empleados = Picado::select('empleado')
             ->whereBetween('fecha', [$star->startOfWeek(), $end->endOfWeek()])
             ->distinct('empleado')
-            ->orderBy('empleado','ASC')
+            ->orderBy('empleado', 'ASC')
             ->get();
 
-        if(!$empleados->count())
-        {
+        if (!$empleados->count()) {
             $t = null;
             return view('home', compact('t'));
         }
@@ -62,7 +61,7 @@ class HomeController extends Controller
                     $horas = Picado::where('empleado', $empleado->empleado)->where('fecha', $star->toDateString())->get();
                     $t['empleados'][$empleado->empleado][$star->toDateString()] = $this->isCorrect($horas);
                     if (!in_array($t['days'][$i] . " " . $star->format('d-m-Y'), $t['columnas'])) {
-                        array_push($t['columnas'],$t['days'][$i] . " " . $star->format('d-m-Y'));
+                        array_push($t['columnas'], $t['days'][$i] . " " . $star->format('d-m-Y'));
                     }
                 } else {
                     $horas = Picado::where('empleado', $empleado->empleado)->where('fecha', $star->addDay(1)->toDateString())->get();
@@ -87,10 +86,10 @@ class HomeController extends Controller
             ? $this->getTimeWorked($collection)
             : [
                 'entrada' => '',
-                'salida' => '',
-                'time' => 'Error',
-                'day' => 0,
-                'url' => ''
+                'salida'  => '',
+                'time'    => 'Error',
+                'day'     => 0,
+                'url'     => ''
             ];
     }
 
@@ -107,12 +106,12 @@ class HomeController extends Controller
             // dd($intervalo->h);
             if ($time == null) {
                 $time['time'] = date('H:i', strtotime($intervalo->format('%H:%i')));
-                $time['url'] = date('Y-m-d',strtotime($col[$i]['tiempo']));
-                $time['day'] = date('N',strtotime($col[$i]['tiempo']));
+                $time['url'] = date('Y-m-d', strtotime($col[$i]['tiempo']));
+                $time['day'] = date('N', strtotime($col[$i]['tiempo']));
             } else {
 
-                $time['day'] = date('N',strtotime($col[$i]['tiempo']));
-                $time['url'] = date('Y-m-d',strtotime($col[$i]['tiempo']));
+                $time['day'] = date('N', strtotime($col[$i]['tiempo']));
+                $time['url'] = date('Y-m-d', strtotime($col[$i]['tiempo']));
                 if ($m % 2 == 0) {
                     $time['time'] = date('H:i', strtotime($time['time'] . " + " . $intervalo->h . "hours + " . $intervalo->i . " minutes"));
                 } else {
@@ -136,37 +135,37 @@ class HomeController extends Controller
     }
 
 
-
-    public function aplicado($empleado,$day)
+    public function aplicado($empleado, $day)
     {
-        $picado = Picado::where('empleado',$empleado)
-                          ->where('fecha',$day)->get();
+        $picado = Picado::where('empleado', $empleado)
+            ->where('fecha', $day)
+            ->orderBy('id', 'asc')
+            ->get();
 
-        return view('ampliado',compact('empleado','day','picado'));
+        return view('ampliado', compact('empleado', 'day', 'picado'));
     }
 
     public function mensual(Request $request)
     {
-        if(!$request->has('month'))
-        {
+        if (!$request->has('month')) {
             return view('mensual');
         }
         \Carbon\Carbon::setLocale('es');
-        $partes = explode('-',$request->get('month'));
+        $partes = explode('-', $request->get('month'));
         $year = $partes[0];
         $month = $partes[1];
-        $c = \Carbon\Carbon::create($year,$month,'01');
+        $c = \Carbon\Carbon::create($year, $month, '01');
 
-        $ini =$c->firstOfMonth()->format('Y-m-d');
+        $ini = $c->firstOfMonth()->format('Y-m-d');
         $fin = $c->lastOfMonth()->format('Y-m-d');
 
-        $fechas = date_range($ini,$fin,"+1 day", "d");
-        $dias = date_range($ini,$fin,"+1 day", "N");
-        $dia_completo = date_range($ini,$fin,"+1 day","Y-m-d");
+        $fechas = date_range($ini, $fin, "+1 day", "d");
+        $dias = date_range($ini, $fin, "+1 day", "N");
+        $dia_completo = date_range($ini, $fin, "+1 day", "Y-m-d");
 
-        $empleados = Empleado::select('nombre')->orderBy('nombre','ASC')->get();
+        $empleados = Empleado::select('nombre')->orderBy('nombre', 'ASC')->get();
 
-        return view('mensual',compact('t','fechas','dias','empleados','dia_completo'));
+        return view('mensual', compact('t', 'fechas', 'dias', 'empleados', 'dia_completo'));
     }
 
 
