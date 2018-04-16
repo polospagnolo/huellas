@@ -6,6 +6,10 @@
             color: red;
         }
 
+        .table-des a {
+            color: white;
+        }
+
         .table-via {
             background: #adadad;
             color: black;
@@ -13,6 +17,13 @@
 
         .table-ret {
             background: red;
+            color: yellow;
+        }
+        .table-via a {
+            color: black;
+        }
+
+        .table-ret a {
             color: yellow;
         }
     </style>
