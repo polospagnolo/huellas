@@ -58,13 +58,13 @@ class HomeController extends Controller
 
             for ($i = 0; $i < 7; $i++) {
                 if ($i == 0) {
-                    $horas = Picado::where('empleado', $empleado->empleado)->where('fecha', $star->toDateString())->get();
+                    $horas = Picado::where('empleado', $empleado->empleado)->where('fecha', $star->toDateString())->orderBy('id', 'asc')->get();
                     $t['empleados'][$empleado->empleado][$star->toDateString()] = $this->isCorrect($horas);
                     if (!in_array($t['days'][$i] . " " . $star->format('d-m-Y'), $t['columnas'])) {
                         array_push($t['columnas'], $t['days'][$i] . " " . $star->format('d-m-Y'));
                     }
                 } else {
-                    $horas = Picado::where('empleado', $empleado->empleado)->where('fecha', $star->addDay(1)->toDateString())->get();
+                    $horas = Picado::where('empleado', $empleado->empleado)->where('fecha', $star->addDay(1)->toDateString())->orderBy('id', 'asc')->get();
                     $t['empleados'][$empleado->empleado][$star->toDateString()] = $this->isCorrect($horas);
                     if (!in_array($t['days'][$i] . " " . $star->format('d-m-Y'), $t['columnas'])) {
                         array_push($t['columnas'], $t['days'][$i] . " " . $star->format('d-m-Y'));
