@@ -39,7 +39,7 @@ class UploadController extends Controller
     public function load($name)
     {
         $r = [];
-        $path = "uploads\\".$name;
+        $path = "uploads/".$name;
 
         $fr = fopen(public_path($path), 'r');
         while (!feof($fr)) {
