@@ -66,18 +66,28 @@ function date_range($first, $last, $step = '+1 day', $output_format = 'd/m/Y')
     return $dates;
 }
 
-function getRetraso($empleado, $date)
-{
-    $manual = \App\Manual::where('empleado', $empleado->nombre)
-        ->whereDate('created_at', $date)
-        ->with('motivo')->first();
-    if(!$manual)
+if (!function_exists('getRetraso')) {
+    function getRetraso($empleado, $date)
     {
-        return null;
-    }
-    return $manual;
+        $manual = \App\Manual::where('empleado', $empleado->nombre)
+            ->whereDate('created_at', $date)
+            ->with('motivo')->first();
+        if (!$manual) {
+            return null;
+        }
+        return $manual;
 
+    }
 }
+
+function canUpluad()
+{
+    $ids = config('app.userCanUploadFileDat');
+    $authId = auth()->id();
+
+    return in_array($authId,$ids);
+}
+
 
 /*
 |--------------------------------------------------------------------------
