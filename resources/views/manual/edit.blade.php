@@ -37,9 +37,13 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-10">
                                     <input type="text" name="comment" id="comment" class="form-control"
                                            placeholder="Comentario" value="{{$manual->comentario}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="time" name="time" id="time" class="form-control"
+                                           value="{{date('H:i',strtotime($manual->time))}}">
                                 </div>
                             </div>
                             <br>

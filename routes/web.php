@@ -23,6 +23,8 @@ Route::get('picado/ampliado/{empleado}/{day}','HomeController@aplicado')->name('
 Route::get('/mensual','HomeController@mensual')->name('mensual');
 Route::get('/upload','UploadController@showForm')->name('upload.form');
 Route::post('/upload','UploadController@store')->name('upload.store');
+Route::get('/picado/{picado}/comment','HomeController@comment')->name('picado.comment');
+Route::post('/picado/{picado}/comment','HomeController@saveComment')->name('picado.comment.save');
 
 Route::resource('/manual','ManualController');
 

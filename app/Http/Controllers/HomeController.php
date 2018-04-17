@@ -168,5 +168,18 @@ class HomeController extends Controller
         return view('mensual', compact('t', 'fechas', 'dias', 'empleados', 'dia_completo'));
     }
 
+    public function comment(Picado $picado)
+    {
+        return view('comment',compact('picado'));
+    }
+
+    public function saveComment(Picado $picado, Request $request)
+    {
+        $picado->comentario = $request->get('comentario');
+        $picado->update();
+
+        flash('Comentario agregado correctamente!')->success();
+        return redirect()->back();
+    }
 
 }

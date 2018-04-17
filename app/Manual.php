@@ -12,7 +12,8 @@ class Manual extends Model
         'empleado',
         'tipo',
         'comentario',
-        'motivo_id'
+        'motivo_id',
+        'time',
     ];
 
     protected $appends= ['type'];

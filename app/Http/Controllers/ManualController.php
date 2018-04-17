@@ -52,6 +52,7 @@ class ManualController extends Controller
        $manual->tipo = $request->get('type');
        $manual->comentario = $request->has('comment') ? $request->get('comment') : null;
        $manual->motivo_id = $request->get('motivo_id');
+       $manual->time = $request->get('time');
        $manual->save();
 
        flash('Entrada / Salida guardada con éxito!')->success();
@@ -99,6 +100,7 @@ class ManualController extends Controller
         $manual->tipo = $request->get('type');
         $manual->comentario = $request->has('comment') ? $request->get('comment') : null;
         $manual->motivo_id = $request->get('motivo_id');
+        $manual->time = $request->get('time');
         $manual->update();
 
         flash('Entrada / Salida actualizada con éxito!')->success();
@@ -122,7 +124,7 @@ class ManualController extends Controller
 
         return $datatables->eloquent($builder)
             ->editColumn('created_at', function ($manual) {
-                return $manual->created_at->format('d-m-Y H:i:s3');
+                return $manual->created_at->format('d-m-Y')." ".$manual->time;
             })
 
             ->editColumn('tipo', function ($manual) {

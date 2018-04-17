@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -17,6 +17,8 @@
                                         <th>Fecha y Hora</th>
                                         <th>Dedo</th>
                                         <th>Tipo</th>
+                                        <th>Comentario</th>
+                                        <th width="1%"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -27,6 +29,10 @@
                                                 <td>{{$pi->tiempo}}</td>
                                                 <td>{{$pi->dedo == 1 ? 'Sí' : 'No'}}</td>
                                                 <td>{{$pi->type}}</td>
+                                                <td>{{$pi->comentario}}</td>
+                                                <td><button type="button" class="btn btn-primary brn-sm" data-toggle="modal" data-target="#modal_{{$pi->id}}">
+                                                        Añadir
+                                                    </button></td>
                                             </tr>
                                         @endforeach
                                     @else
@@ -40,4 +46,7 @@
             </div>
         </div>
     </div>
+    @foreach($picado as $pi)
+        @include('comment',$pi)
+    @endforeach
 @endsection
