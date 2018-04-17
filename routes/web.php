@@ -26,6 +26,9 @@ Route::post('/upload','UploadController@store')->name('upload.store');
 Route::get('/picado/{picado}/comment','HomeController@comment')->name('picado.comment');
 Route::post('/picado/{picado}/comment','HomeController@saveComment')->name('picado.comment.save');
 
+Route::resource('/salida','SalidaController');
+
+
 Route::resource('/manual','ManualController');
 
 
@@ -36,5 +39,6 @@ Route::resource('/manual','ManualController');
 
 Route::group(['prefix' => 'datatable'], function ()
 {
-    Route::get('manual/','ManualController@dataTable')->name('datatable.manual');
+    Route::get('manual','ManualController@dataTable')->name('datatable.manual');
+    Route::get('salida','SalidaController@dataTable')->name('datatable.salida');
 });

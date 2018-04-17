@@ -41,6 +41,35 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- Salidas Especiales -->
+                        <h2>Salidas Especiales</h2>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered table-hover table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Empleado</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Comentario</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if(count($salidas))
+                                        @foreach($salidas as $salida)
+                                            <tr>
+                                                <td>{{$salida->empleado}}</td>
+                                                <td>{{$salida->date}}</td>
+                                                <td>{{$salida->time}}</td>
+                                                <td>{{$salida->comentario}}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

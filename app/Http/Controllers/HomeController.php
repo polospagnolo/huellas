@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Empleado;
 use App\Picado;
+use App\Salida;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -142,7 +143,12 @@ class HomeController extends Controller
             ->orderBy('id', 'asc')
             ->get();
 
-        return view('ampliado', compact('empleado', 'day', 'picado'));
+        $salidas = Salida::where('empleado', $empleado)
+            ->where('date', $day)
+            ->orderBy('id', 'asc')
+            ->get();
+
+        return view('ampliado', compact('empleado', 'day', 'picado','salidas'));
     }
 
     public function mensual(Request $request)
@@ -170,7 +176,7 @@ class HomeController extends Controller
 
     public function comment(Picado $picado)
     {
-        return view('comment',compact('picado'));
+        return view('comment', compact('picado'));
     }
 
     public function saveComment(Picado $picado, Request $request)
