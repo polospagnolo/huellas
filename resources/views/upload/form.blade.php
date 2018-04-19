@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Subir Dat</div>
+                <div class="card-header">Subir Dat <a href="http://192.168.1.201/csl/download" target="_blank" class="pull-right btn btn-info">Descargar Dat</a></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
