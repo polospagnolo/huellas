@@ -125,7 +125,7 @@ return [
     /**
      *
      */
-    'userCanUploadFileDat' => [1,2],
+    'userCanUploadFileDat' => [1,2,3],
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
