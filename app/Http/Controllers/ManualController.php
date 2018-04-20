@@ -23,7 +23,9 @@ class ManualController extends Controller
      */
     public function index()
     {
-        return view('manual.index');
+        return canUpluad()
+            ? view('manual.index')
+            : abort(403,'No puedes acceder a esta zona.');
     }
 
     /**
@@ -36,7 +38,9 @@ class ManualController extends Controller
         $options = config('app.types');
         $employees = Empleado::all();
         $motivos = MotivoAusencia::all();
-        return view('manual.create',compact('options','employees','motivos'));
+        return canUpluad()
+            ? view('manual.create',compact('options','employees','motivos'))
+            : abort(403,'No puedes acceder a esta zona.');
     }
 
     /**
@@ -82,7 +86,9 @@ class ManualController extends Controller
         $options = config('app.types');
         $employees = Empleado::all();
         $motivos = MotivoAusencia::all();
-        return view('manual.edit',compact('options','employees','motivos','manual'));
+        return canUpluad()
+            ? view('manual.edit',compact('options','employees','motivos','manual'))
+            : abort(403,'No puedes acceder a esta zona.');
 
 
     }

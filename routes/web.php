@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/picado', 'HomeController@index')->name('home');
-Route::get('/load','HomeController@load')->name('load');
 Route::get('picado/ampliado/{empleado}/{day}','HomeController@aplicado')->name('picado.ampliado');
 Route::get('/mensual','HomeController@mensual')->name('mensual');
 Route::get('/upload','UploadController@showForm')->name('upload.form');

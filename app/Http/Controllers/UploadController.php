@@ -15,7 +15,9 @@ class UploadController extends Controller
 
     public function showForm()
     {
-        return view('upload.form');
+        return canUpluad()
+            ? view('upload.form')
+            : abort(403,'No puedes acceder a esta zona.');
     }
 
     public function store(Request $request)

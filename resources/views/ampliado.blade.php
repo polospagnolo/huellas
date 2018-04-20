@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Detalle del día <strong>{{$day}}</strong> del empleado
-                        <strong>{{$empleado}}</strong> <a class="btn btn-success pull-right" href="{{redirect()->back()->getTargetUrl()}}">VOLVER</a></div>
+                        <strong>{{$empleado}}</strong> <a class="btn btn-success pull-right"
+                                                          href="{{redirect()->back()->getTargetUrl()}}">VOLVER</a></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
@@ -30,9 +31,14 @@
                                                 <td>{{$pi->dedo == 1 ? 'Sí' : 'No'}}</td>
                                                 <td>{{$pi->type}}</td>
                                                 <td>{{$pi->comentario}}</td>
-                                                <td><button type="button" class="btn btn-primary brn-sm" data-toggle="modal" data-target="#modal_{{$pi->id}}">
-                                                        Añadir
-                                                    </button></td>
+                                                <td>
+                                                    @if(canUpluad())
+                                                        <button type="button" class="btn btn-primary brn-sm"
+                                                                data-toggle="modal" data-target="#modal_{{$pi->id}}">
+                                                            Añadir
+                                                        </button>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else

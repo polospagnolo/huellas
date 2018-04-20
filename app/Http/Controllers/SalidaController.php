@@ -11,12 +11,16 @@ class SalidaController extends Controller
 {
     public function index()
     {
-        return view('salida.index');
+        return canUpluad()
+            ? view('salida.index')
+            : abort(403,'No puedes acceder a esta zona.');
     }
     public function create()
     {
         $employees = Empleado::all();
-        return view('salida.create',compact('employees'));
+        return canUpluad()
+            ? view('salida.create',compact('employees'))
+            : abort(403,'No puedes acceder a esta zona.');
     }
 
     public function store(Request $request)
@@ -37,7 +41,9 @@ class SalidaController extends Controller
     public function edit(Salida $salida)
     {
         $employees = Empleado::all();
-        return view('salida.edit',compact('employees','salida'));
+        return canUpluad()
+            ? view('salida.edit',compact('employees','salida'))
+            : abort(403,'No puedes acceder a esta zona.');
     }
 
     public function update(Salida $salida, Request $request)

@@ -86,11 +86,11 @@ class HomeController extends Controller
         return $collection->count() % 2 == 0
             ? $this->getTimeWorked($collection)
             : [
-                'entrada' => '',
+                'entrada' => 'Ver',
                 'salida'  => '',
                 'time'    => 'Error',
-                'day'     => 0,
-                'url'     => ''
+                'day'     => '',
+                'url'     => $collection->first()->fecha
             ];
     }
 
