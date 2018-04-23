@@ -25,7 +25,7 @@ class ManualController extends Controller
     {
         return canUpluad()
             ? view('manual.index')
-            : abort(403,'No puedes acceder a esta zona.');
+            : abort(403, 'No puedes acceder a esta zona.');
     }
 
     /**
@@ -39,35 +39,37 @@ class ManualController extends Controller
         $employees = Empleado::all();
         $motivos = MotivoAusencia::all();
         return canUpluad()
-            ? view('manual.create',compact('options','employees','motivos'))
-            : abort(403,'No puedes acceder a esta zona.');
+            ? view('manual.create', compact('options', 'employees', 'motivos'))
+            : abort(403, 'No puedes acceder a esta zona.');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-       $manual = New Manual();
-       $manual->empleado = $request->get('employee');
-       $manual->tipo = $request->get('type');
-       $manual->comentario = $request->has('comment') ? $request->get('comment') : null;
-       $manual->motivo_id = $request->get('motivo_id');
-       $manual->time = $request->get('time');
-       $manual->save();
+        $manual = New Manual();
+        $manual->empleado = $request->get('employee');
+        $manual->tipo = $request->get('type');
+        $manual->comentario = $request->has('comment') ? $request->get('comment') : null;
+        $manual->motivo_id = $request->get('motivo_id');
+        $manual->time = $request->get('time');
+        $manual->save();
 
-       flash('Entrada / Salida guardada con éxito!')->success();
+        flash('Entrada / Salida guardada con éxito!')->success();
 
-       return redirect()->route('manual.index');
+        return redirect()->route('manual.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -78,7 +80,8 @@ class ManualController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Manual $manual)
@@ -87,8 +90,8 @@ class ManualController extends Controller
         $employees = Empleado::all();
         $motivos = MotivoAusencia::all();
         return canUpluad()
-            ? view('manual.edit',compact('options','employees','motivos','manual'))
-            : abort(403,'No puedes acceder a esta zona.');
+            ? view('manual.edit', compact('options', 'employees', 'motivos', 'manual'))
+            : abort(403, 'No puedes acceder a esta zona.');
 
 
     }
@@ -96,8 +99,9 @@ class ManualController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Manual $manual)
@@ -116,7 +120,8 @@ class ManualController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -130,20 +135,18 @@ class ManualController extends Controller
 
         return $datatables->eloquent($builder)
             ->editColumn('created_at', function ($manual) {
-                return $manual->created_at->format('d-m-Y')." ".$manual->time;
+                return $manual->created_at->format('d-m-Y') . " " . $manual->time;
             })
-
             ->editColumn('tipo', function ($manual) {
-              return $manual->type;
+                return $manual->type;
             })
-            ->addColumn('nombre', function($manual){
+            ->addColumn('nombre', function ($manual) {
                 $manual->motivo->nombre;
             })
-            ->addColumn('editar', function($manual){
-                return '<a href="'.route('manual.edit',$manual->id).'" class="btn btn-info btn-xs">EDITAR</a>';
+            ->addColumn('editar', function ($manual) {
+                return '<a href="' . route('manual.edit', $manual->id) . '" class="btn btn-info btn-xs">EDITAR</a>';
             })
-
-            ->rawColumns(['completada', 'tipo','editar'])
+            ->rawColumns(['completada', 'tipo', 'editar'])
             ->make();
     }
 }
