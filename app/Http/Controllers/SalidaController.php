@@ -60,6 +60,13 @@ class SalidaController extends Controller
         return redirect()->route('salida.index');
     }
 
+    public function destroy(Salida $salida)
+    {
+        $salida->delete();
+        flash('Salida Especial eliminada con éxito!')->success();
+        return redirect()->route('salida.index');
+    }
+
     public function datatable(Datatables $datatables)
     {
         $builder = Salida::select('*');
@@ -75,8 +82,10 @@ class SalidaController extends Controller
             ->addColumn('editar', function($manual){
                 return '<a href="'.route('salida.edit',$manual->id).'" class="btn btn-info btn-xs">EDITAR</a>';
             })
-
-            ->rawColumns(['editar'])
+            ->addColumn('destroy',function($manual){
+                return view('salida.destroy',compact('manual'));
+            })
+            ->rawColumns(['editar','destroy'])
             ->make();
     }
 }

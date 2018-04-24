@@ -7,7 +7,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Listado Salida Especiales <a href="{{route('salida.create')}}" class="btn btn-info btn-sm">Nueva Entrada</a></div>
+                    <div class="card-header">Listado Salida Especiales <a href="{{route('salida.create')}}"
+                                                                          class="btn btn-info btn-sm">Nueva Entrada</a>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -20,6 +22,7 @@
                                         <th>FECHA</th>
                                         <th>HORA</th>
                                         <th>EDITAR</th>
+                                        <th>ELIMINAR</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -73,11 +76,19 @@
                     {data: 'comentario', name: 'salidas.comentario'},
                     {data: 'date', name: 'salidas.date'},
                     {data: 'time', name: 'salidas.time'},
-                    {data: 'editar'}
+                    {data: 'editar'},
+                    {data: 'destroy'}
                 ],
-                "order": [[ 0, "desc" ]]
+                "order": [[0, "desc"]]
             });
-
+            $(document).on('click', '.delete', function (event) {
+                event.preventDefault();
+                var cuestion = confirm('¿Desea eliminar la Salida Especial?');
+                if (cuestion) {
+                    $(this).parent().submit();
+                }
+                return;
+            });
         });
     </script>
 @stop
