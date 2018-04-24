@@ -27,4 +27,9 @@ class Manual extends Model
     {
         return config('app.types')[$this->tipo];
     }
+
+    public function routeDelete()
+    {
+        return route('manual.destroy',$this);
+    }
 }

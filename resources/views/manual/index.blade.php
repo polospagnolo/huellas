@@ -21,6 +21,7 @@
                                         <th>COMENTARIO</th>
                                         <th>FECHA Y HORA</th>
                                         <th>EDITAR</th>
+                                        <th>ELIMINAR</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -75,8 +76,19 @@
                     {data: 'motivo.nombre', name: 'motivo.nombre'},
                     {data: 'comentario', name: 'manual.comentario'},
                     {data: 'created_at', name: 'manual.created_at'},
-                    {data: 'editar'}
+                    {data: 'editar'},
+                    {data: 'destroy'}
                 ]
+            });
+
+            $(document).on('click', '.delete', function (event) {
+                event.preventDefault();
+                var cuestion = confirm('¿Desea eliminar la entrada manual?');
+                if(cuestion)
+                {
+                    $(this).parent().submit();
+                }
+                return;
             });
 
         });

@@ -124,9 +124,11 @@ class ManualController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Manual $manual)
     {
-        //
+        $manual->delete();
+        flash('Entrada manual eliminada con éxito!')->success();
+        return redirect()->route('manual.index');
     }
 
     public function datatable(Datatables $datatables)
@@ -146,7 +148,10 @@ class ManualController extends Controller
             ->addColumn('editar', function ($manual) {
                 return '<a href="' . route('manual.edit', $manual->id) . '" class="btn btn-info btn-xs">EDITAR</a>';
             })
-            ->rawColumns(['completada', 'tipo', 'editar'])
+            ->addColumn('destroy', function ($manual) {
+                return view('manual.destroy', compact('manual'));
+            })
+            ->rawColumns(['completada', 'tipo', 'editar', 'destroy'])
             ->make();
     }
 }
