@@ -78,7 +78,8 @@
                     {data: 'created_at', name: 'manual.created_at'},
                     {data: 'editar'},
                     {data: 'destroy'}
-                ]
+                ],
+                "order": [[0, "desc"]]
             });
 
             $(document).on('click', '.delete', function (event) {
