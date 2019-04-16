@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/mensual';
+    protected $redirectTo = '/picado';
 
     /**
      * Create a new controller instance.
