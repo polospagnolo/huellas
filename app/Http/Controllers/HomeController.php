@@ -77,7 +77,7 @@ class HomeController extends Controller
                 }
             }
         }
-        //dd($t);
+       //dd($t);
         return view('home', compact('t'));
     }
 
@@ -86,11 +86,13 @@ class HomeController extends Controller
         return $collection->count() % 2 == 0
             ? $this->getTimeWorked($collection)
             : [
-                'entrada' => 'Ver',
+                'entrada' => 'MOTIVO',
                 'salida'  => '',
                 'time'    => 'Error',
                 'day'     => '',
-                'url'     => $collection->first()->fecha
+                'url'     => $collection->first()->fecha,
+                'type' => $collection->first()->tipo,
+                'comment' => $collection->first()->comentario,
             ];
     }
 
@@ -127,7 +129,8 @@ class HomeController extends Controller
             if ($i + 1 == count($col) - 1) {
                 $time['salida'] = date('H:i:s', strtotime($col[$i + 1]['tiempo']));
             }
-
+            $time['type'] = $col[$i]['tipo'];
+            $time['comment'] = $col[$i]['comentario'];
             $m++;
 
         }

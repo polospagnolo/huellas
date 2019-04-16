@@ -119,7 +119,8 @@ return [
         4 => 'Salida Personal',
         5 => 'Entrada Personal',
         6 => 'Salida Profesional',
-        7 => 'Entrada Profesional'
+        7 => 'Entrada Profesional',
+        8 => 'Entrada Manual'
     ],
 
     /**

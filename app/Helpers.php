@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('isBefore')) {
+if (!function_exists('isToBeLate')) {
 
     function isToBeLate($day, $time)
     {

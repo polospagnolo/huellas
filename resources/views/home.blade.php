@@ -50,13 +50,16 @@
 
                                             @foreach($value as $val)
                                                 @if(count($val) >= 3)
-                                                    <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}} {{isToBeLate($val['day'],$val['entrada'])}}">
+                                                    <td class="{{$val['time'] == 'Error' && $val['type'] < 8 ? 'table-danger' : ''}} {{$val['type'] == '8' ? 'table-success' : ''}} {{isToBeLate($val['day'],$val['entrada'])}}"
+                                                        style="cursor: pointer;"
+                                                        data-toggle="tooltip"
+                                                        title="{{$val['comment']}}">
                                                         <a href="{{route('picado.ampliado',[$key,$val['url']])}}">{{$val['entrada']}}</a>
                                                     </td>
-                                                    <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}}">
+                                                    <td class="{{$val['time'] == 'Error' && $val['type'] < 8 ? 'table-danger' : ''}} {{$val['type'] == '8' ? 'table-success' : ''}}">
                                                         <a href="{{route('picado.ampliado',[$key,$val['url']])}}">{{$val['salida']}}</a>
                                                     </td>
-                                                    <td class="{{$val['time'] == 'Error' ? 'table-danger' : ''}}">{{$val['time']}}</td>
+                                                    <td class="{{$val['time'] == 'Error' && $val['type'] < 8 ? 'table-danger' : ''}} {{$val['type'] == '8' ? 'table-success' : ''}}">{{$val['type'] < 8 ? $val['time'] : ''}}</td>
                                                 @else
                                                     <td></td>
                                                     <td></td>
@@ -74,4 +77,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 @endsection
