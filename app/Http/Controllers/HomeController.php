@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if (!$request->has('week')) {
+        if (!$request->has('week') || is_null($request->get('week'))) {
             $t = null;
             return view('home', compact('t'));
         }
