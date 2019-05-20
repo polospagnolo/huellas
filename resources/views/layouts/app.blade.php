@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     @yield('css')
 </head>
-<body style="font-family: 'Roboto', sans-serif; !important;">
+<body style="font-family: 'Roboto', sans-serif !important; font-weight: bold !important;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
