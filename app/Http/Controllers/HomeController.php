@@ -101,7 +101,7 @@ class HomeController extends Controller
         $time = null;
 
         $col = $collection->toArray();
-        $m = 2;
+        $m = 1;
         for ($i = 0; $i < $collection->count(); $i += 2) {
             $f1 = new \DateTime($col[$i]['tiempo']);
             $f2 = new \DateTime(($col[$i + 1]['tiempo']));
