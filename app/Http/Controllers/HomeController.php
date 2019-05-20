@@ -118,7 +118,7 @@ class HomeController extends Controller
                 if ($m % 2 == 0) {
                     $time['time'] = date('H:i', strtotime($time['time'] . " + " . $intervalo->h . "hours + " . $intervalo->i . " minutes"));
                 } else {
-                    $time['time'] = date('H:i', strtotime($time['time'] . " - " . $intervalo->h . "hours - " . $intervalo->i . " minutes"));
+                   // $time['time'] = date('H:i', strtotime($time['time'] . " - " . $intervalo->h . "hours - " . $intervalo->i . " minutes"));
                 }
 
             }
