@@ -131,7 +131,7 @@ class HomeController extends Controller
             }
             $time['type'] = $col[$i]['tipo'];
             $time['comment'] = $col[$i]['comentario'];
-            $m++;
+            $m +=2;
 
         }
 
