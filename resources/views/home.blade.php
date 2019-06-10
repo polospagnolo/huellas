@@ -1,6 +1,25 @@
 @extends('layouts.app')
-
+@section('css')
+<style>
+    td.comment
+    {
+        position: relative !important;
+    }
+        td.comment::after {
+            position: absolute;
+            content:'';
+            border-style: solid;
+            border-width: 0 25px 25px 0;
+            border-color: transparent #00458f transparent transparent;
+            width: 15px;
+            height: 15px;
+            top: 0;
+            right: 0;
+        }
+    </style>
+@endsection
 @section('content')
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -50,10 +69,12 @@
 
                                             @foreach($value as $val)
                                                 @if(count($val) >= 3)
-                                                    <td class="{{$val['time'] == 'Error' && $val['type'] < 8 ? 'table-danger' : ''}} {{$val['type'] == '8' ? 'table-success' : ''}} {{isToBeLate($val['day'],$val['entrada'])}}"
+                                                    <td class="{{$val['time'] == 'Error' && $val['type'] < 8 ? 'table-danger' : ''}} {{$val['type'] == '8' ? 'table-success' : ''}} {{isToBeLate($val['day'],$val['entrada'])}} {{$val['comment'] ? 'comment' : '' }}"
                                                         style="cursor: pointer;"
-                                                        data-toggle="tooltip"
-                                                        title="{{$val['comment']}}">
+                                                        @if($val['comment'])
+                                        data-toggle="tooltip" title="{{$val['comment']}}" 
+                                                        @endif
+                                                       >
                                                         <a href="{{route('picado.ampliado',[$key,$val['url']])}}">{{$val['entrada']}}</a>
                                                     </td>
                                                     <td class="{{$val['time'] == 'Error' && $val['type'] < 8 ? 'table-danger' : ''}} {{$val['type'] == '8' ? 'table-success' : ''}}">

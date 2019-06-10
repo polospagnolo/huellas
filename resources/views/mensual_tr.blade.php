@@ -9,7 +9,7 @@
         @endif
     </td>
 @else
-    <td class="{{$dia > 5 ? 'table-dark' : ''}} text-center {{$retraso->motivo->clase}}" style="cursor: pointer;"
+    <td class="{{$dia > 5 ? 'table-dark' : ''}} text-center {{$retraso->motivo->clase}} {{!is_null($retraso->comentario) ? 'comment' : '' }}" style="cursor: pointer;"
         data-toggle="tooltip"
         title="{{$retraso->comentario}}">
         @if($dia < 6)
