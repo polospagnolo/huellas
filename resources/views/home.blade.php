@@ -10,7 +10,7 @@
             content:'';
             border-style: solid;
             border-width: 0 25px 25px 0;
-            border-color: transparent #00458f transparent transparent;
+            border-color: transparent #F44336 transparent transparent;
             width: 15px;
             height: 15px;
             top: 0;
